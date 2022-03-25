@@ -1,0 +1,46 @@
+Dengan menggunakan Golang, buatlah sebuah aplikasi BE dengan spesifikasi sebagai berikut :
+
+
+Release 1 : Basic App
+Buatlah API endpoint untuk :
+- Register User
+- Login dan Logout
+Setelah Register berhasil, user bisa langsung Login. Tidak perlu ada validasi email pada tahap ini.
+
+
+Release 2 : Fitur 1
+Kemkes sedang akan melakukan pengumpulan data fasilitas kesehatan di seluruh Indonesia. Buatlah API endpoint untuk CRUD fasilitas kesehatan dengan spesifikasi berikut :
+- Jenis faskes ada 4 : RS, Puskesmas, Posyandu, Klinik
+- Tiap faskes harus input jumlah nakes ( tenaga kesehatan ), jika tidak ada jumlah ini, inputan gagal baik untuk input data baru maupun untuk update data
+Semua akses di Fitur 1 hanya bisa dilakukan oleh User yang login
+
+
+Release 3 : Fitur 3
+Export data ke dalam bentuk PDF dengan semi colon / titik koma / ';' sebagai separator / delimiter. Fitur 3 hanya bisa dilakukan oleh User yang login
+
+
+Release 4 : Deployment
+Silakan deploy App yang Anda bikin ke platform SaaS yang gratis seperti Heroku. Boleh menggunakan yang lain selain Heroku
+
+
+Release 5 : Dokumentasi
+Buatlah dokumentasi untuk Release 1 - 3 mengikuti panduan dokumentasi di https://github.com/i01107/documentation-example. URL endpoint yang digunakan dalam dokumentasi harus menggunakan URL yang didapat dari Heroku, bukan localhost
+
+
+Untuk semua spesifikasi di atas, use you're best judgement, terutama untuk kolom-kolom apa yang ada di table nya. Selama relevan dan membantu fitur-fitur yang kamu bangun, feel free. DB yang digunakan : bebas
+
+Lakukan komit berkala dan tunjukkan pengetahuanmu seputar git flow yang best practice ( penggunaan branch, dll )
+
+
+Bonus, lakukan Release di bawah ini jika kamu cukup PD untuk mencari challenge lebih dan membuktikan kemampuan kamu untuk development dalam waktu singkat
+
+Release 6 : Bonus
+Explore 1 atau 2 fitur tambahan yang menurut kamu cukup challenging. Dan penilaian terhadap nilai bonus ini kan didapat jika benar-benar berjalan dan bekerja dengan baik. This is the part where you can show your skill
+
+Contoh :
+- email validation ketika registrasi
+- export data bisa dipilih berdasarkan kode kota tertentu
+- export data bisa langsung jadi PDF dan looked nice
+- logging, lengkap dengan halaman dashboard untuk monitor nya
+- dockerize, lengkap dengan docker-compose nya, dan running dengan hanya 1 - 2 step sederhana
+- dll
