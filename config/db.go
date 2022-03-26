@@ -9,7 +9,7 @@ import (
 )
 
 func Database() *gorm.DB {
-	dsn := "host=ec2-3-225-213-67.compute-1.amazonaws.com user=qjsictgoejtudf password=87913aa93040bdd8730aeba23cac4a983f7ee214cc686fee78e66a217d9f98cb dbname=d1rciihq0fc3n9 port=5432 sslmode=require TimeZone=Asia/Shanghai"
+	dsn := "host=ec2-44-194-92-192.compute-1.amazonaws.com user=yuztftsgqvfhbk password=6ed1e7cd312f1c7af7001842031cdb9256d80a3986c399fe16ff2e32497c03ec dbname=dagvse9fdnkcck port=5432 sslmode=require TimeZone=Asia/Shanghai"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
