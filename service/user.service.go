@@ -2,16 +2,17 @@ package service
 
 import (
 	"errors"
+	"time"
 	"triadmoko-be-golang/entity"
-	"triadmoko-be-golang/mapping"
+	"triadmoko-be-golang/formatter"
 	"triadmoko-be-golang/repository"
 
 	"golang.org/x/crypto/bcrypt"
 )
 
 type Service interface {
-	GetUser() (entity.User, error)
-	InputRegister(user mapping.FormatUser) (entity.User, error)
+	InputRegister(input formatter.FormatUser) (entity.User, error)
+	GetUserByID(ID int) (entity.User, error)
 }
 type service struct {
 	repository repository.Repository
@@ -20,14 +21,7 @@ type service struct {
 func NewServiceUser(repository repository.Repository) *service {
 	return &service{repository}
 }
-func (s *service) GetUser() (entity.User, error) {
-	user, err := s.repository.FindAll()
-	if err != nil {
-		return user, err
-	}
-	return user, nil
-}
-func (s *service) InputRegister(input mapping.FormatUser) (entity.User, error) {
+func (s *service) InputRegister(input formatter.FormatUser) (entity.User, error) {
 	user := entity.User{}
 
 	user.Email = input.Email
@@ -36,6 +30,8 @@ func (s *service) InputRegister(input mapping.FormatUser) (entity.User, error) {
 	user.Username = input.Username
 	user.Address = input.Address
 	user.Phone = input.Phone
+	user.CreateAt = time.Now()
+	user.UpdateAt = time.Now()
 
 	userEmail, err := s.repository.FindByEmail(input.Email)
 	if err != nil {
@@ -57,4 +53,15 @@ func (s *service) InputRegister(input mapping.FormatUser) (entity.User, error) {
 		return newUser, err
 	}
 	return newUser, nil
+}
+
+func (s *service) GetUserByID(ID int) (entity.User, error) {
+	user, err := s.repository.FindByID(ID)
+	if err != nil {
+		return user, err
+	}
+	if user.ID == 0 {
+		return user, errors.New("user not found")
+	}
+	return user, nil
 }

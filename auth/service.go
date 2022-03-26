@@ -2,32 +2,27 @@ package auth
 
 import (
 	"errors"
+	"os"
 
 	"github.com/dgrijalva/jwt-go"
 )
 
 type Service interface {
-	GenerateToken(ID int, Level int, Email, FName, Phone, Avatar, Address string) (string, error)
+	GenerateToken(ID int) (string, error)
 	ValidateToken(token string) (*jwt.Token, error)
 }
 type jwtService struct {
 }
 
-var SECRET_KEY_USER = []byte("BtmsDigital_Mandiri_Api_sdfkjahsKJSKDJHFBdjhKJHjhkKKDJHFBdjhKJHjhKDJKDJHFBdjhKJHjhKDJHFBdjhKJHjhKDJHFBdjhKJHjhKDJHFBdjhKJHjhKDJHFBdjhKJKDJHFBdjhKJHjhkHjhkkkkkHFBdjhKJHjhKDJHFBdjhKJHjhkkkDJHFBdjhKJHKDJHFBdjhKJHjhkjhkjHKbcwtwecnsoweorpwhsmzxcw")
+var SECRET_KEY_USER = []byte(os.Getenv("JWT_SECRET"))
 
 func NewService() *jwtService {
 	return &jwtService{}
 }
 
-func (s *jwtService) GenerateToken(ID int, Level int, Email, FName, Phone, Avatar, Address string) (string, error) {
+func (s *jwtService) GenerateToken(ID int) (string, error) {
 	payload := jwt.MapClaims{}
 	payload["user_id"] = ID
-	payload["email"] = Email
-	payload["full_name"] = FName
-	payload["address"] = Address
-	payload["phone"] = Phone
-	payload["level"] = Level
-	payload["avatar"] = Avatar
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, payload)
 

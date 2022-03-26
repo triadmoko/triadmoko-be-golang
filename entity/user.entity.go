@@ -3,7 +3,7 @@ package entity
 import "time"
 
 type User struct {
-	ID        uint32 `json:"id"`
+	ID        int    `json:"id"`
 	Firstname string `json:"firstname"`
 	Lastname  string `json:"lastname"`
 	Username  string `json:"username"`

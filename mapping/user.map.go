@@ -3,15 +3,15 @@ package mapping
 import "triadmoko-be-golang/entity"
 
 type FormatUser struct {
-	Email            string `json:"email" binding:"required, email"`
-	FirstName        string `json:"firstname"  binding:"required"`
-	Lastname         string `json:"lastname" binding:"required"`
-	Username         string `json:"username" binding:"required"`
-	Address          string `json:"address" binding:"required"`
-	Phone            uint64 `json:"phone" binding:"required"`
+	Email            string `json:"email"`
+	FirstName        string `json:"firstname" `
+	Lastname         string `json:"lastname"`
+	Username         string `json:"username"`
+	Address          string `json:"address"`
+	Phone            uint64 `json:"phone"`
 	Role             uint8  `json:"role"`
-	Password         string `json:"password" binding:"required"`
-	Confirm_Password string `json:"confirm_password" binding:"required"`
+	Password         string `json:"password"`
+	Confirm_Password string `json:"confirm_password"`
 }
 
 func UserFormatter(user entity.User) FormatUser {

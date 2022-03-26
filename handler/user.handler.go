@@ -2,9 +2,8 @@ package handler
 
 import (
 	"net/http"
-	"triadmoko-be-golang/entity"
+	"triadmoko-be-golang/formatter"
 	"triadmoko-be-golang/helper"
-	"triadmoko-be-golang/mapping"
 	"triadmoko-be-golang/service"
 
 	"github.com/gin-gonic/gin"
@@ -12,32 +11,18 @@ import (
 
 type handler struct {
 	userService service.Service
-	authService auth.Service
+	// authService auth.Service
 }
 
 func NewHandlerUser(userService service.Service) *handler {
 	return &handler{userService}
 }
 
-func (h *handler) GetUser(c *gin.Context) {
-	var user entity.User
-	user, err := h.userService.GetUser()
-	if err != nil {
-		data := mapping.UserFormatter(user)
-		response := helper.ResponseApi("Failed", http.StatusBadRequest, "failed", data)
-		c.JSON(http.StatusBadRequest, response)
-	}
-	data := mapping.UserFormatter(user)
-	response := helper.ResponseApi("Succes", http.StatusOK, "failed", data)
-	c.JSON(http.StatusOK, response)
-
-}
-
 func (h *handler) RegisterUser(c *gin.Context) {
 	// tangkap input dari user
 	// map input dari user ke struct RegisterUserInput
 	// struct di atas di passing sebagai parameter service
-	var input mapping.FormatUser
+	var input formatter.FormatUser
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -67,14 +52,14 @@ func (h *handler) RegisterUser(c *gin.Context) {
 		return
 	}
 
-	token, err := h.authService.GenerateToken(newUser.ID, newUser.Level, newUser.Email, newUser.FName, newUser.Phone, newUser.Avatar, newUser.Address)
-	if err != nil {
-		response := helper.ResponseApi("Register Failed", http.StatusBadRequest, "error", nil)
-		c.JSON(http.StatusBadRequest, response)
-		return
-	}
+	// token, err := h.authService.GenerateToken(newUser.ID)
+	// if err != nil {
+	// 	response := helper.ResponseApi("Register Failed", http.StatusBadRequest, "error", nil)
+	// 	c.JSON(http.StatusBadRequest, response)
+	// 	return
+	// }
 
-	response := helper.ResponseApi("Account Has been registered", http.StatusOK, "success", token)
+	response := helper.ResponseApi("Account Has been registered", http.StatusOK, "success", newUser)
 
 	c.JSON(http.StatusOK, response)
 }
