@@ -8,6 +8,8 @@ require (
 	github.com/joho/godotenv v1.4.0
 )
 
+require github.com/go-sql-driver/mysql v1.6.0 // indirect
+
 require (
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
@@ -39,6 +41,7 @@ require (
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/go-playground/validator.v9 v9.31.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
+	gorm.io/driver/mysql v1.3.2
 	gorm.io/driver/postgres v1.3.1 // indirect
 	gorm.io/gorm v1.23.3 // indirect
 )

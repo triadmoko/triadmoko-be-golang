@@ -5,14 +5,13 @@ import (
 	"os"
 	"triadmoko-be-golang/entity"
 
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 func Database() *gorm.DB {
-	dsn := "host=" + os.Getenv("HOST") + " user=" + os.Getenv("USER") + " password=" + os.Getenv("PASSWORD") + " dbname=" + os.Getenv("DBNAME") + " port=" + os.Getenv("PORTDB") + " sslmode=enable TimeZone=Asia/Jakarta"
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-
+	dsn := os.Getenv("USER") + ":" + os.Getenv("PASSWORD") + "@tcp(" + os.Getenv("HOST") + ":" + os.Getenv("PORTDB") + ")/" + os.Getenv("DBNAME") + "?charset=utf8mb4&parseTime=True&loc=Local"
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println("Database not Connect")
 	} else {
