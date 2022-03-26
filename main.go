@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"strings"
 	"triadmoko-be-golang/auth"
@@ -13,15 +12,14 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 func main() {
 	// load .env file
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatalf("Error loading .env file")
-	}
+	// err := godotenv.Load(".env")
+	// if err != nil {
+	// 	log.Fatalf("Error loading .env file")
+	// }
 	db := config.Database()
 
 	// userAuthService := auth.NewService()
@@ -34,7 +32,7 @@ func main() {
 
 	user := router.Group("/api/v1/user")
 	user.POST("/register", handler.RegisterUser)
-	router.Run(":8000") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
 func authMiddleware(userAuthService auth.Service, userService service.Service) gin.HandlerFunc {
