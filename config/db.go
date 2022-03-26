@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 	"triadmoko-be-golang/entity"
 
 	"gorm.io/driver/postgres"
@@ -9,7 +10,13 @@ import (
 )
 
 func Database() *gorm.DB {
-	dsn := "host=ec2-3-225-213-67.compute-1.amazonaws.com user=caivnfhfypngwn password=9a743a329c1b0855cb8504b551432c18861974de50ab9115102aa22b635d1226 dbname=dahc9ia5r6dt0m port=5432 sslmode=disable TimeZone=Asia/Jakarta"
+	dbUser := os.Getenv("DB_USER")
+	dbPass := os.Getenv("DB_PASSWORD")
+	dbHost := os.Getenv("DB_HOST")
+	dbName := os.Getenv("DB_NAME")
+	dbPort := os.Getenv("DB_PORT")
+
+	dsn := fmt.Sprintf("host=%s user=%s password=%s port=%s dbname=%s sslmode=require TimeZone=Asia/Shanghai", dbHost, dbUser, dbPass, dbPort, dbName)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
