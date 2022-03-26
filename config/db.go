@@ -9,7 +9,7 @@ import (
 )
 
 func Database() *gorm.DB {
-	dsn := "host=" + os.Getenv("HOST") + " user=" + os.Getenv("USER") + " password=" + os.Getenv("PASSWORD") + " dbname=" + os.Getenv("DBNAME") + " port=" + os.Getenv("PORT") + " sslmode=disable TimeZone=Asia/Jakarta"
+	dsn := "host=" + os.Getenv("HOST") + " user=" + os.Getenv("USER") + " password=" + os.Getenv("PASSWORD") + " dbname=" + os.Getenv("DBNAME") + " port=" + os.Getenv("PORTDB") + " sslmode=disable TimeZone=Asia/Jakarta"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
@@ -17,5 +17,6 @@ func Database() *gorm.DB {
 	} else {
 		fmt.Println("Success connect database")
 	}
+	// db.AutoMigrate(&entity.User{})
 	return db
 }

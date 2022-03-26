@@ -3,6 +3,9 @@ package main
 import (
 	"log"
 	"triadmoko-be-golang/config"
+	"triadmoko-be-golang/handler"
+	"triadmoko-be-golang/repository"
+	"triadmoko-be-golang/service"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -14,14 +17,17 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error loading .env file")
 	}
+	db := config.Database()
 
-	config.Database()
+	repositoryUser := repository.NewRepositoryUser(db)
+	serviceUser := service.NewServiceUser(repositoryUser)
+	handler := handler.NewHandlerUser(serviceUser)
 
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	router := gin.Default()
+
+	user := router.Group("/api/v1/user")
+	user.GET("/", handler.GetUser)
+
+	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+
 }
