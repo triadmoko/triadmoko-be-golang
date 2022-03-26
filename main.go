@@ -35,7 +35,6 @@ func main() {
 	user := router.Group("/api/v1/user")
 	user.POST("/register", handler.RegisterUser)
 	router.Run(":8000") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
-
 }
 
 func authMiddleware(userAuthService auth.Service, userService service.Service) gin.HandlerFunc {
