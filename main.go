@@ -23,6 +23,7 @@ func main() {
 		log.Fatalf("Error loading .env file")
 	}
 	db := config.Database()
+
 	// userAuthService := auth.NewService()
 
 	repositoryUser := repository.NewRepositoryUser(db)
