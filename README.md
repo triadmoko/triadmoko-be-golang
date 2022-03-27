@@ -2,11 +2,12 @@
 
 Documentation API 
 
-Stack App:
-Golang
-Gorm
-Gin
-Postgres
+**Stack App**:
+
+- Golang
+- Gorm
+- Gin
+- Postgres
 
 ## Global Response
 
@@ -114,7 +115,7 @@ func main() {
 ### Login
 Method `Post` Login
 
-EndPoint Login
+**EndPoint Login**
 ```
 https://test-golang-triadmoko.herokuapp.com/api/v1/user/login
 ```
@@ -182,5 +183,73 @@ func main() {
     return
   }
   fmt.Println(string(body))
+}
+```
+
+## Faskes Endpoint
+
+### Create Faskes
+Method `Post`
+
+**Endpoit Create Faskes**
+```
+https://test-golang-triadmoko.herokuapp.com/api/v1/faskes/create
+```
+
+**Request Headers**
+```text
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDgzOTUwMzksInVzZXJfaWQiOjJ9.vYSBM_sk0bvmmPsVnvN4gTmh8-v6nwr4ccNfcV2MiVA
+```
+
+**Body**
+```json
+{
+    "name":"Klinik"
+}
+```
+
+**Response**
+```json
+{
+    "message": "Insert Success",
+    "code": 200,
+    "status": "success",
+    "data": {
+        "id": 4,
+        "name": "Klinik"
+    }
+}
+```
+### Get Data Faskes
+Method Get
+
+**Endpoint Get Data Faskes**
+
+```
+https://test-golang-triadmoko.herokuapp.com/api/v1/faskes/
+```
+
+**Request Headers**
+```text
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDgzOTUwMzksInVzZXJfaWQiOjJ9.vYSBM_sk0bvmmPsVnvN4gTmh8-v6nwr4ccNfcV2MiVA
+```
+
+**Body**
+```json
+{
+    "name":"Klinik"
+}
+```
+
+**Response **
+```json
+{
+    "message": "Insert Success",
+    "code": 200,
+    "status": "success",
+    "data": {
+        "id": 4,
+        "name": "Klinik"
+    }
 }
 ```
