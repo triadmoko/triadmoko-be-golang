@@ -21,7 +21,7 @@ func (h *handler) Login(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
-	loggedinUser, err := h.userService.Login(input)
+	loggedinUser, err := h.service.Login(input)
 
 	if err != nil {
 		errorMessage := gin.H{"errors": err.Error()}
@@ -68,7 +68,7 @@ func (h *handler) RegisterUser(c *gin.Context) {
 		return
 	}
 
-	newUser, err := h.userService.InputRegister(input)
+	newUser, err := h.service.InputRegister(input)
 
 	if err != nil {
 		errorMessage := gin.H{"errors ": err.Error()}

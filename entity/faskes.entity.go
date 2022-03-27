@@ -1,11 +1,11 @@
 package entity
 
-import (
-	"gorm.io/gorm"
-)
+import "time"
 
 type Faskes struct {
-	gorm.Model
-	ID   int
-	Name string
+	ID       int       `json:"id"`
+	Name     string    `json:"name"`
+	CreateAt time.Time `json:"create_at"`
+	UpdateAt time.Time `json:"update_at"`
+	DeleteAt time.Time `json:"delete_at"`
 }

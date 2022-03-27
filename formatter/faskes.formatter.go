@@ -14,3 +14,11 @@ func FormatterFaskes(faskes entity.Faskes) FormatFaskes {
 	}
 	return response
 }
+func FormattFaskesAll(faskes []entity.Faskes) []FormatFaskes {
+	var faskesAll []FormatFaskes
+	for _, v := range faskes {
+		formatter := FormatterFaskes(v)
+		faskesAll = append(faskesAll, formatter)
+	}
+	return faskesAll
+}

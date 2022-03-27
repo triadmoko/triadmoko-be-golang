@@ -13,6 +13,7 @@ type Repository interface {
 	FindByEmail(email string) (entity.User, error)
 
 	SaveFaskes(faskes entity.Faskes) (entity.Faskes, error)
+	FindAllFaskes() ([]entity.Faskes, error)
 }
 type repository struct {
 	db *gorm.DB

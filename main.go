@@ -24,9 +24,9 @@ func main() {
 
 	userAuthService := auth.NewService()
 
-	repositoryUser := repository.NewRepositoryUser(db)
-	serviceUser := service.NewServiceUser(repositoryUser)
-	handler := handler.NewHandlerUser(serviceUser, userAuthService)
+	repository := repository.NewRepositoryUser(db)
+	service := service.NewServiceUser(repository)
+	handler := handler.NewHandlerUser(service, userAuthService)
 
 	router := gin.Default()
 	user := router.Group("/api/v1/user")
@@ -34,11 +34,13 @@ func main() {
 	user.POST("/register", handler.RegisterUser)
 	user.POST("/login", handler.Login)
 
-	faskes.POST("/create", handler.CreateFaskes)
+	
+	faskes.GET("/", handler.FindAllFaskes)
+	faskes.POST("/create", authMiddleware(userAuthService, service), handler.CreateFaskes)
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
-func authMiddleware(userAuthService auth.Service, userService service.Service) gin.HandlerFunc {
+func authMiddleware(userAuthService auth.Service, service service.Service) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
 
@@ -68,7 +70,7 @@ func authMiddleware(userAuthService auth.Service, userService service.Service) g
 		}
 		userID := int(claim["user_id"].(float64))
 
-		user, err := userService.GetUserByID(userID)
+		user, err := service.GetUserByID(userID)
 		if err != nil {
 			response := helper.ResponseApi("Unauthorized", http.StatusUnauthorized, "error", nil)
 			c.AbortWithStatusJSON(http.StatusUnauthorized, response)

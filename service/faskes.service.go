@@ -15,3 +15,10 @@ func (s *service) InputFaskes(input mapping.InputFaskes) (entity.Faskes, error) 
 	}
 	return newFaskes, nil
 }
+func (s *service) FindAllFaskes() ([]entity.Faskes, error) {
+	faskes, err := s.repository.FindAllFaskes()
+	if err != nil {
+		return faskes, err
+	}
+	return faskes, err
+}

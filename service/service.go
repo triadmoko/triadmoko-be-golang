@@ -13,6 +13,7 @@ type Service interface {
 	Login(input mapping.LoginInput) (entity.User, error)
 
 	InputFaskes(input mapping.InputFaskes) (entity.Faskes, error)
+	FindAllFaskes() ([]entity.Faskes, error)
 }
 type service struct {
 	repository repository.Repository
