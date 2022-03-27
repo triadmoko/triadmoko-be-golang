@@ -2,23 +2,13 @@ package handler
 
 import (
 	"net/http"
-	"triadmoko-be-golang/auth"
 	"triadmoko-be-golang/formatter"
 	"triadmoko-be-golang/helper"
 	"triadmoko-be-golang/mapping"
-	"triadmoko-be-golang/service"
 
 	"github.com/gin-gonic/gin"
 )
 
-type handler struct {
-	userService service.Service
-	authService auth.Service
-}
-
-func NewHandlerUser(userService service.Service, authService auth.Service) *handler {
-	return &handler{userService, authService}
-}
 func (h *handler) Login(c *gin.Context) {
 	var input mapping.LoginInput
 

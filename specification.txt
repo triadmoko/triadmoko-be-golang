@@ -18,7 +18,7 @@ Semua akses di Fitur 1 hanya bisa dilakukan oleh User yang login
 Release 3 : Fitur 3
 Export data ke dalam bentuk PDF dengan semi colon / titik koma / ';' sebagai separator / delimiter. Fitur 3 hanya bisa dilakukan oleh User yang login
 
-
+ 
 Release 4 : Deployment
 Silakan deploy App yang Anda bikin ke platform SaaS yang gratis seperti Heroku. Boleh menggunakan yang lain selain Heroku
 

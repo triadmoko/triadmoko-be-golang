@@ -6,23 +6,9 @@ import (
 	"triadmoko-be-golang/entity"
 	"triadmoko-be-golang/formatter"
 	"triadmoko-be-golang/mapping"
-	"triadmoko-be-golang/repository"
 
 	"golang.org/x/crypto/bcrypt"
 )
-
-type Service interface {
-	InputRegister(input formatter.FormatUser) (entity.User, error)
-	GetUserByID(ID int) (entity.User, error)
-	Login(input mapping.LoginInput) (entity.User, error)
-}
-type service struct {
-	repository repository.Repository
-}
-
-func NewServiceUser(repository repository.Repository) *service {
-	return &service{repository}
-}
 
 func (s *service) InputRegister(input formatter.FormatUser) (entity.User, error) {
 	user := entity.User{}

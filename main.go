@@ -30,9 +30,11 @@ func main() {
 
 	router := gin.Default()
 	user := router.Group("/api/v1/user")
+	faskes := router.Group("/api/v1/faskes")
 	user.POST("/register", handler.RegisterUser)
 	user.POST("/login", handler.Login)
 
+	faskes.POST("/create", handler.CreateFaskes)
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
