@@ -8,11 +8,17 @@ require (
 	github.com/joho/godotenv v1.4.0
 )
 
-require github.com/go-sql-driver/mysql v1.6.0 // indirect
+require (
+	github.com/go-sql-driver/mysql v1.6.0 // indirect
+	github.com/gorilla/context v1.1.1 // indirect
+	github.com/gorilla/securecookie v1.1.1 // indirect
+	github.com/gorilla/sessions v1.2.0 // indirect
+)
 
 require (
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/gin-contrib/sessions v0.0.4
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.7.7 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect

@@ -59,7 +59,8 @@ func (h *handler) RegisterUser(c *gin.Context) {
 	// 	return
 	// }
 
-	response := helper.ResponseApi("Account Has been registered", http.StatusOK, "success", newUser)
+	format := formatter.FormateResponseRegisterUser(newUser)
+	response := helper.ResponseApi("Register Succesfully ", http.StatusOK, "success", format)
 
 	c.JSON(http.StatusOK, response)
 }
