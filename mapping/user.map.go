@@ -13,6 +13,10 @@ type FormatUser struct {
 	Password         string `json:"password"`
 	Confirm_Password string `json:"confirm_password"`
 }
+type LoginInput struct {
+	Email    string `json:"email" binding:"required,email"`
+	Password string `json:"password" binding:"required"`
+}
 
 func UserFormatter(user entity.User) FormatUser {
 	format := FormatUser{

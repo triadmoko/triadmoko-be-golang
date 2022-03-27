@@ -24,7 +24,16 @@ type ResponseRegisterUser struct {
 	Address   string `json:"address"`
 	Phone     uint64 `json:"phone"`
 }
+type UserFormatter struct {
+	Token string `json:"token"`
+}
 
+func UserJsonFormatter(token string) UserFormatter {
+	formatter := UserFormatter{
+		Token: token,
+	}
+	return formatter
+}
 func FormateResponseRegisterUser(user entity.User) ResponseRegisterUser {
 	response := ResponseRegisterUser{
 		Email:     user.Email,

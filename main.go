@@ -22,16 +22,17 @@ func main() {
 	// }
 	db := config.Database()
 
-	// userAuthService := auth.NewService()
+	userAuthService := auth.NewService()
 
 	repositoryUser := repository.NewRepositoryUser(db)
 	serviceUser := service.NewServiceUser(repositoryUser)
-	handler := handler.NewHandlerUser(serviceUser)
+	handler := handler.NewHandlerUser(serviceUser, userAuthService)
 
 	router := gin.Default()
 
 	user := router.Group("/api/v1/user")
 	user.POST("/register", handler.RegisterUser)
+	user.POST("/login", handler.Login)
 
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

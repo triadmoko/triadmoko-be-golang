@@ -5,6 +5,7 @@ import (
 	"time"
 	"triadmoko-be-golang/entity"
 	"triadmoko-be-golang/formatter"
+	"triadmoko-be-golang/mapping"
 	"triadmoko-be-golang/repository"
 
 	"golang.org/x/crypto/bcrypt"
@@ -13,6 +14,7 @@ import (
 type Service interface {
 	InputRegister(input formatter.FormatUser) (entity.User, error)
 	GetUserByID(ID int) (entity.User, error)
+	Login(input mapping.LoginInput) (entity.User, error)
 }
 type service struct {
 	repository repository.Repository
@@ -62,6 +64,25 @@ func (s *service) GetUserByID(ID int) (entity.User, error) {
 	}
 	if user.ID == 0 {
 		return user, errors.New("user not found")
+	}
+	return user, nil
+}
+
+func (s *service) Login(input mapping.LoginInput) (entity.User, error) {
+
+	email := input.Email
+	password := input.Password
+
+	user, err := s.repository.FindByEmail(email)
+	if err != nil {
+		return user, err
+	}
+	if user.ID == 0 {
+		return user, errors.New("user not found")
+	}
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+	if err != nil {
+		return user, errors.New("password is wrong")
 	}
 	return user, nil
 }
