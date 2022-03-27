@@ -1,12 +1,6 @@
 package helper
 
-import (
-	"triadmoko-be-golang/translation/id"
-
-	indonesia "github.com/go-playground/locales/id"
-	uni "github.com/go-playground/universal-translator"
-	"github.com/go-playground/validator/v10"
-)
+import "github.com/go-playground/validator/v10"
 
 type Response struct {
 	Message string      `json:"message"`
@@ -25,27 +19,17 @@ func ResponseApi(message string, code int, status string, data interface{}) Resp
 	return response
 }
 
-func FormatValidationError(structs interface{}) []string {
-	validate := validator.New()
-	idn := indonesia.New()
-	uni := uni.New(idn, idn)
-	trans, _ := uni.GetTranslator("id")
-	_ = id.RegisterDefaultTranslations(validate, trans)
-
-	err := validate.Struct(structs)
-	errs := translateError(err, trans)
-
-	return errs
-}
-
-func translateError(err error, trans uni.Translator) (errs []string) {
-	if err == nil {
-		return nil
+// func FormatError(err error) []string {
+// 	var errors []string
+// 	for _, e := range err.(validator.ValidationErrors) {
+// 		errors = append(errors, e.Error())
+// 	}
+// 	return errors
+// }
+func FormatValidationError(err error) []string {
+	var errors []string
+	for _, e := range err.(validator.ValidationErrors) {
+		errors = append(errors, e.Error())
 	}
-	validatorErrs := err.(validator.ValidationErrors)
-	for _, e := range validatorErrs {
-		translatedErr := e.Translate(trans)
-		errs = append(errs, translatedErr)
-	}
-	return errs
+	return errors
 }

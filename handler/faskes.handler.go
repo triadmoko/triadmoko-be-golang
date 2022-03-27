@@ -15,7 +15,7 @@ func (h *handler) CreateFaskes(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
-		error := helper.FormatValidationError(input)
+		error := helper.FormatValidationError(err)
 		errorMessage := gin.H{"errors": error}
 
 		response := helper.ResponseApi("Insert Failed", http.StatusUnprocessableEntity, "error", errorMessage)

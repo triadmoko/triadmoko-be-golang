@@ -14,7 +14,7 @@ func (h *handler) Login(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
-		error := helper.FormatValidationError(input)
+		error := helper.FormatValidationError(err)
 		errorMessage := gin.H{"errors": error}
 
 		response := helper.ResponseApi("Login Failed", http.StatusUnprocessableEntity, "error", errorMessage)
