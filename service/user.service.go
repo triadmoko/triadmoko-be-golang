@@ -23,6 +23,7 @@ type service struct {
 func NewServiceUser(repository repository.Repository) *service {
 	return &service{repository}
 }
+
 func (s *service) InputRegister(input formatter.FormatUser) (entity.User, error) {
 	user := entity.User{}
 

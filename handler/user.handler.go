@@ -30,7 +30,6 @@ func (h *handler) Login(c *gin.Context) {
 		response := helper.ResponseApi("Login Failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
-
 	}
 	loggedinUser, err := h.userService.Login(input)
 
@@ -54,6 +53,7 @@ func (h *handler) Login(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 
 }
+
 func (h *handler) RegisterUser(c *gin.Context) {
 	// tangkap input dari user
 	// map input dari user ke struct RegisterUserInput

@@ -2,6 +2,7 @@ package auth
 
 import (
 	"errors"
+	"time"
 
 	"github.com/dgrijalva/jwt-go"
 )
@@ -22,6 +23,7 @@ func NewService() *jwtService {
 func (s *jwtService) GenerateToken(ID int) (string, error) {
 	payload := jwt.MapClaims{}
 	payload["user_id"] = ID
+	payload["exp"] = time.Now().Add(time.Minute * 15).Unix()
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, payload)
 
@@ -35,7 +37,7 @@ func (s *jwtService) ValidateToken(encodedToken string) (*jwt.Token, error) {
 	token, err := jwt.Parse(encodedToken, func(token *jwt.Token) (interface{}, error) {
 		_, oke := token.Method.(*jwt.SigningMethodHMAC)
 		if !oke {
-			return nil, errors.New("Invalid Token")
+			return nil, errors.New("invalid token")
 		}
 		return []byte(SECRET_KEY_USER), nil
 	})

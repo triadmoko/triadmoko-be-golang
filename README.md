@@ -112,7 +112,7 @@ func main() {
 
 
 ### Login
-Method Post
+Method `Post` Login
 
 EndPoint Login
 ```
