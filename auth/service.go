@@ -23,7 +23,7 @@ func NewService() *jwtService {
 func (s *jwtService) GenerateToken(ID int) (string, error) {
 	payload := jwt.MapClaims{}
 	payload["user_id"] = ID
-	payload["exp"] = time.Now().Add(time.Minute * 15).Unix()
+	payload["exp"] = time.Now().Add(time.Minute * 30).Unix()
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, payload)
 

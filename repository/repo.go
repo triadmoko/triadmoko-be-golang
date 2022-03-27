@@ -14,6 +14,8 @@ type Repository interface {
 
 	SaveFaskes(faskes entity.Faskes) (entity.Faskes, error)
 	FindAllFaskes() ([]entity.Faskes, error)
+
+	SaveNakes(nakes entity.Nakes) (entity.Nakes, error)
 }
 type repository struct {
 	db *gorm.DB

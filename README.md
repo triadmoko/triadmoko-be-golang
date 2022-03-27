@@ -115,6 +115,8 @@ func main() {
 ### Login
 Method `Post` Login
 
+Time Expire Login 30 Minute
+
 **EndPoint Login**
 ```
 https://test-golang-triadmoko.herokuapp.com/api/v1/user/login

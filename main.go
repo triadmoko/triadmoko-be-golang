@@ -1,12 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 	"triadmoko-be-golang/auth"
 	"triadmoko-be-golang/config"
 	"triadmoko-be-golang/handler"
 	"triadmoko-be-golang/helper"
+	"triadmoko-be-golang/mapping"
 	"triadmoko-be-golang/repository"
 	"triadmoko-be-golang/service"
 
@@ -26,17 +28,30 @@ func main() {
 
 	repository := repository.NewRepositoryUser(db)
 	service := service.NewServiceUser(repository)
+	newNakes := mapping.InputNakes{
+		NoNakes:  1,
+		FaskesID: 1,
+	}
+	printNakes, err := service.InputNakes(newNakes)
+	if err != nil {
+		fmt.Println("error")
+	}
+	fmt.Println(printNakes)
+	
 	handler := handler.NewHandlerUser(service, userAuthService)
 
 	router := gin.Default()
 	user := router.Group("/api/v1/user")
 	faskes := router.Group("/api/v1/faskes")
+	nakes := router.Group("/api/v1/nakes")
 	user.POST("/register", handler.RegisterUser)
 	user.POST("/login", handler.Login)
 
-	
-	faskes.GET("/", handler.FindAllFaskes)
+	faskes.GET("/", authMiddleware(userAuthService, service), handler.FindAllFaskes)
 	faskes.POST("/create", authMiddleware(userAuthService, service), handler.CreateFaskes)
+
+	nakes.POST("/create", handler.CreateNakes)
+
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 

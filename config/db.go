@@ -25,6 +25,6 @@ func Database() *gorm.DB {
 	} else {
 		fmt.Println("Success connect database")
 	}
-	db.AutoMigrate(&entity.User{}, &entity.Faskes{})
+	db.AutoMigrate(&entity.User{}, &entity.Faskes{}, &entity.Nakes{})
 	return db
 }

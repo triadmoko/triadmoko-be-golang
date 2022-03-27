@@ -14,6 +14,8 @@ type Service interface {
 
 	InputFaskes(input mapping.InputFaskes) (entity.Faskes, error)
 	FindAllFaskes() ([]entity.Faskes, error)
+
+	InputNakes(input mapping.InputNakes) (entity.Nakes, error)
 }
 type service struct {
 	repository repository.Repository
