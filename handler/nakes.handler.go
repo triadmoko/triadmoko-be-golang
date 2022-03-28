@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"log"
 	"net/http"
 	"strconv"
 	"triadmoko-be-golang/entity"
@@ -9,6 +10,7 @@ import (
 	"triadmoko-be-golang/mapping"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jung-kurt/gofpdf"
 )
 
 func (h *handler) CreateNakes(c *gin.Context) {
@@ -108,5 +110,32 @@ func (h *handler) DeleteNakes(c *gin.Context) {
 
 	response := helper.ResponseApi("Delete Success", http.StatusOK, "success", "Data Success Delete")
 
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *handler) NakesPDF(c *gin.Context) {
+	var data []entity.Nakes
+	data, err := h.service.FindAllNakes()
+	if err != nil {
+		data := gin.H{"error": err}
+		response := helper.ResponseApi("Failed Request Nakes", http.StatusBadRequest, "error", data)
+		c.JSON(http.StatusBadRequest, response)
+	}
+
+	pdf := gofpdf.New("P", "mm", "A4", "")
+	pdf.AddPage()
+	pdf.SetFont("Arial", "B", 12)
+	for _, v := range data {
+		j_nakes := strconv.Itoa(v.JumlahNakes)
+		pdf.Cell(40, 10, v.Name+" "+v.Addres+" "+j_nakes+";")
+		pdf.Ln(12)
+	}
+
+	err = pdf.OutputFileAndClose("./pdf/file.pdf")
+	if err != nil {
+		log.Println("ERROR", err.Error())
+	}
+
+	response := helper.ResponseApi("Insert Success", http.StatusOK, "success", "Download pdf di link berikut : '"+c.Request.Host+"/pdf/file.pdf'")
 	c.JSON(http.StatusOK, response)
 }

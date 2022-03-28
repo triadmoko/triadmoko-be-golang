@@ -20,6 +20,7 @@ func main() {
 	// if err != nil {
 	// 	log.Fatalf("Error loading .env file")
 	// }
+
 	db := config.Database()
 
 	userAuthService := auth.NewService()
@@ -29,6 +30,8 @@ func main() {
 	handler := handler.NewHandlerUser(service, userAuthService)
 
 	router := gin.Default()
+	router.Static("/pdf/file.pdf", "./pdf/file.pdf")
+
 	user := router.Group("/api/v1/user")
 	faskes := router.Group("/api/v1/faskes")
 	nakes := router.Group("/api/v1/nakes")
@@ -36,12 +39,13 @@ func main() {
 	user.POST("/login", handler.Login)
 
 	faskes.GET("/", authMiddleware(userAuthService, service), handler.FindAllFaskes)
-	faskes.POST("/create", handler.CreateFaskes)
+	faskes.POST("/create", authMiddleware(userAuthService, service), handler.CreateFaskes)
 
-	nakes.POST("/create", handler.CreateNakes)
+	nakes.POST("/create", authMiddleware(userAuthService, service), handler.CreateNakes)
 	nakes.PUT("/update/:id", authMiddleware(userAuthService, service), handler.UpdateNakes)
-	nakes.GET("/", handler.FindAllNakes)
-	nakes.DELETE("/delete/:id", handler.DeleteNakes)
+	nakes.GET("/", authMiddleware(userAuthService, service), handler.FindAllNakes)
+	nakes.DELETE("/delete/:id", authMiddleware(userAuthService, service), handler.DeleteNakes)
+	nakes.GET("/pdf", handler.NakesPDF)
 
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
