@@ -2,7 +2,6 @@ package service
 
 import (
 	"errors"
-	"time"
 	"triadmoko-be-golang/entity"
 	"triadmoko-be-golang/mapping"
 )
@@ -11,10 +10,9 @@ func (s *service) InputNakes(input mapping.InputNakes) (entity.Nakes, error) {
 	nakes := entity.Nakes{}
 
 	nakes.FaskesID = input.FaskesID
-	nakes.NoNakes = input.NoNakes
+	nakes.JumlahNakes = input.JumlahNakes
 	nakes.Addres = input.Addres
 	nakes.Name = input.Name
-	nakes.CreateAt = time.Now()
 
 	newNakes, err := s.repository.SaveNakes(nakes)
 
@@ -29,10 +27,9 @@ func (s *service) UpdateNakes(ID int, input mapping.UpdateNakes) (entity.Nakes, 
 		return nakes, err
 	}
 	nakes.FaskesID = input.FaskesID
-	nakes.NoNakes = input.NoNakes
+	nakes.JumlahNakes = input.JumlahNakes
 	nakes.Addres = input.Addres
 	nakes.Name = input.Name
-	nakes.UpdateAt = time.Now()
 
 	newNakes, err := s.repository.UpdateNakes(nakes)
 
@@ -50,4 +47,11 @@ func (s *service) FindIDNakes(ID int) (entity.Nakes, error) {
 		return nakes, errors.New("nakes not found")
 	}
 	return nakes, nil
+}
+func (s *service) FindAllNakes() ([]entity.Nakes, error) {
+	nakes, err := s.repository.FindAllNakes()
+	if err != nil {
+		return nakes, err
+	}
+	return nakes, err
 }

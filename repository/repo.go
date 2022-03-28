@@ -18,6 +18,7 @@ type Repository interface {
 	SaveNakes(nakes entity.Nakes) (entity.Nakes, error)
 	FindIDNakes(ID int) (entity.Nakes, error)
 	UpdateNakes(nakes entity.Nakes) (entity.Nakes, error)
+	FindAllNakes() ([]entity.Nakes, error)
 }
 type repository struct {
 	db *gorm.DB

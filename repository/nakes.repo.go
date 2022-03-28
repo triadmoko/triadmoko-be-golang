@@ -26,3 +26,11 @@ func (r *repository) FindIDNakes(ID int) (entity.Nakes, error) {
 	}
 	return nakes, nil
 }
+func (r *repository) FindAllNakes() ([]entity.Nakes, error) {
+	var nakes []entity.Nakes
+	err := r.db.Find(&nakes).Error
+	if err != nil {
+		return nakes, err
+	}
+	return nakes, nil
+}

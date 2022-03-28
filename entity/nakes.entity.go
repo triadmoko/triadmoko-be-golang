@@ -1,14 +1,12 @@
 package entity
 
-import "time"
+import "gorm.io/gorm"
 
 type Nakes struct {
-	ID      int
-	NoNakes int
-	Name    string
-	Addres  string
-	FaskesID int
-	CreateAt time.Time
-	UpdateAt time.Time
-	DeleteAt time.Time
+	gorm.Model
+	ID          int
+	JumlahNakes int
+	Name        string
+	Addres      string
+	FaskesID    int
 }

@@ -3,6 +3,7 @@ package handler
 import (
 	"net/http"
 	"strconv"
+	"triadmoko-be-golang/entity"
 	"triadmoko-be-golang/formatter"
 	"triadmoko-be-golang/helper"
 	"triadmoko-be-golang/mapping"
@@ -68,6 +69,21 @@ func (h *handler) UpdateNakes(c *gin.Context) {
 	}
 	formatJSON := formatter.FormatterNakes(newNakes)
 	response := helper.ResponseApi("Insert Success", http.StatusOK, "success", formatJSON)
+
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *handler) FindAllNakes(c *gin.Context) {
+	var data []entity.Nakes
+	data, err := h.service.FindAllNakes()
+	if err != nil {
+		data := gin.H{"error": err}
+		response := helper.ResponseApi("Failed Request Nakes", http.StatusBadRequest, "error", data)
+		c.JSON(http.StatusBadRequest, response)
+	}
+
+	formatJSON := formatter.FormattNakesAll(data)
+	response := helper.ResponseApi("Get Nakes Success", http.StatusOK, "success", formatJSON)
 
 	c.JSON(http.StatusOK, response)
 }

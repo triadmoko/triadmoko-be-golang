@@ -26,7 +26,6 @@ func main() {
 
 	repository := repository.NewRepositoryUser(db)
 	service := service.NewServiceUser(repository)
-
 	handler := handler.NewHandlerUser(service, userAuthService)
 
 	router := gin.Default()
@@ -37,11 +36,11 @@ func main() {
 	user.POST("/login", handler.Login)
 
 	faskes.GET("/", authMiddleware(userAuthService, service), handler.FindAllFaskes)
-	faskes.POST("/create", authMiddleware(userAuthService, service), handler.CreateFaskes)
+	faskes.POST("/create", handler.CreateFaskes)
 
-	nakes.POST("/create", authMiddleware(userAuthService, service), handler.CreateNakes)
+	nakes.POST("/create", handler.CreateNakes)
 	nakes.PUT("/update/:id", authMiddleware(userAuthService, service), handler.UpdateNakes)
-
+	nakes.GET("/", handler.FindAllNakes)
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 

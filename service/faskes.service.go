@@ -1,7 +1,6 @@
 package service
 
 import (
-	"time"
 	"triadmoko-be-golang/entity"
 	"triadmoko-be-golang/mapping"
 )
@@ -9,7 +8,6 @@ import (
 func (s *service) InputFaskes(input mapping.InputFaskes) (entity.Faskes, error) {
 	faskes := entity.Faskes{}
 	faskes.Name = input.Name
-	faskes.CreateAt = time.Now()
 
 	newFaskes, err := s.repository.SaveFaskes(faskes)
 	if err != nil {
