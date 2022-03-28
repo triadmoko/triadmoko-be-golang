@@ -4,9 +4,9 @@ import "gorm.io/gorm"
 
 type Nakes struct {
 	gorm.Model
-	ID          int
-	JumlahNakes int
-	Name        string
-	Addres      string
-	FaskesID    int
+	JumlahNakes int    `json:"jumlah_nakes"`
+	Name        string `json:"name"`
+	Addres      string `json:"address"`
+	FaskesID    int    `json:"faskes_id"`
+	Faskes      Faskes `json:"faskes"`
 }

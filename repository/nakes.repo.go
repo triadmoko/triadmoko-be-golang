@@ -20,7 +20,7 @@ func (r *repository) UpdateNakes(nakes entity.Nakes) (entity.Nakes, error) {
 }
 func (r *repository) FindIDNakes(ID int) (entity.Nakes, error) {
 	var nakes entity.Nakes
-	err := r.db.Where("ID = ?", ID).Find(&nakes).Error
+	err := r.db.Where("ID = ?", ID).Preload("Faskes").Find(&nakes).Error
 	if err != nil {
 		return nakes, err
 	}
@@ -28,7 +28,7 @@ func (r *repository) FindIDNakes(ID int) (entity.Nakes, error) {
 }
 func (r *repository) FindAllNakes() ([]entity.Nakes, error) {
 	var nakes []entity.Nakes
-	err := r.db.Find(&nakes).Error
+	err := r.db.Preload("Faskes").Find(&nakes).Error
 	if err != nil {
 		return nakes, err
 	}

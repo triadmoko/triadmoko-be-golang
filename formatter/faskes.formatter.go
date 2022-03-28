@@ -9,7 +9,6 @@ type FormatFaskes struct {
 
 func FormatterFaskes(faskes entity.Faskes) FormatFaskes {
 	response := FormatFaskes{
-		ID:   faskes.ID,
 		Name: faskes.Name,
 	}
 	return response

@@ -46,7 +46,7 @@ func main() {
 	nakes.GET("/", authMiddleware(userAuthService, service), handler.FindAllNakes)
 	nakes.DELETE("/delete/:id", authMiddleware(userAuthService, service), handler.DeleteNakes)
 	nakes.GET("/pdf", authMiddleware(userAuthService, service), handler.NakesPDF)
-
+	nakes.GET("/:id", handler.FindIDNakes)
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 

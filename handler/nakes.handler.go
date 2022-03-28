@@ -84,8 +84,7 @@ func (h *handler) FindAllNakes(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, response)
 	}
 
-	formatJSON := formatter.FormattNakesAll(data)
-	response := helper.ResponseApi("Get Nakes Success", http.StatusOK, "success", formatJSON)
+	response := helper.ResponseApi("Get Nakes Success", http.StatusOK, "success", data)
 
 	c.JSON(http.StatusOK, response)
 }
@@ -137,5 +136,30 @@ func (h *handler) NakesPDF(c *gin.Context) {
 	}
 
 	response := helper.ResponseApi("Insert Success", http.StatusOK, "success", "Download pdf di link berikut : '"+c.Request.Host+"/pdf/file.pdf'")
+	c.JSON(http.StatusOK, response)
+}
+func (h *handler) FindIDNakes(c *gin.Context) {
+	id := c.Param("id")
+	intId, err := strconv.Atoi(id)
+	if err != nil {
+		// error to object
+		error := helper.FormatValidationError(err)
+		errorMessage := gin.H{"errors": error}
+
+		response := helper.ResponseApi("Find Nakes Failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+	nakes, err := h.service.FindIDNakes(intId)
+	if err != nil {
+		// error to object
+		error := helper.FormatValidationError(err)
+		errorMessage := gin.H{"errors": error}
+
+		response := helper.ResponseApi("Find Nakes Failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+	response := helper.ResponseApi("Insert Success", http.StatusOK, "success", nakes)
 	c.JSON(http.StatusOK, response)
 }

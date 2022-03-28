@@ -1,6 +1,8 @@
 package formatter
 
-import "triadmoko-be-golang/entity"
+import (
+	"triadmoko-be-golang/entity"
+)
 
 type FormatNakes struct {
 	JumlahNakes int    `json:"jumlah_nakes" `
