@@ -352,16 +352,21 @@ Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDgzOTUw
     "status": "success",
     "data": [
         {
-            "jumlah_nakes": 122,
-            "name": "triadqmokao",
-            "address": "dfas4wefwef",
-            "faskes_id": 1
-        },
-        {
+            "ID": 2,
+            "CreatedAt": "2022-03-28T06:06:22.862467Z",
+            "UpdatedAt": "2022-03-28T06:06:22.862467Z",
+            "DeletedAt": null,
             "jumlah_nakes": 1223,
             "name": "triadmoko",
             "address": "dfas4wefwef",
-            "faskes_id": 1
+            "faskes_id": 1,
+            "faskes": {
+                "ID": 1,
+                "CreatedAt": "2022-03-28T06:06:22.862467Z",
+                "UpdatedAt": "2022-03-28T06:06:22.862467Z",
+                "DeletedAt": null,
+                "name": "Rumah Sakit"
+            }
         }
     ]
 }
