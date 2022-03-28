@@ -255,3 +255,165 @@ Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDgzOTUw
     }
 }
 ```
+
+## Nakes 
+### Create Nakes
+Method `POST` Nakes
+
+```
+https://test-golang-triadmoko.herokuapp.com/api/v1/nakes/create
+```
+
+**Request Headers**
+```text
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDgzOTUwMzksInVzZXJfaWQiOjJ9.vYSBM_sk0bvmmPsVnvN4gTmh8-v6nwr4ccNfcV2MiVA
+```
+
+**Body**
+```json
+{
+    "jumlah_nakes": 1223,
+    "name": "triadmoko",
+    "address":"dfas4wefwef",
+    "faskes_id":1
+}
+```
+**Response**
+```json
+{
+    "message": "Insert Success",
+    "code": 200,
+    "status": "success",
+    "data": {
+        "jumlah_nakes": 1223,
+        "name": "triadmoko",
+        "address": "dfas4wefwef",
+        "faskes_id": 1
+    }
+}
+```
+### Update Nakes
+Method `PUT` 
+Endpoint 
+
+```text
+https://test-golang-triadmoko.herokuapp.com/api/v1/nakes/update/1
+```
+
+**Request Headers**
+```text
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDgzOTUwMzksInVzZXJfaWQiOjJ9.vYSBM_sk0bvmmPsVnvN4gTmh8-v6nwr4ccNfcV2MiVA
+```
+
+**Body**
+```json
+{
+    "jumlah_nakes": 122,
+    "name": "triadqmokao",
+    "address":"dfas4wefwef",
+    "faskes_id":1
+}
+```
+**Response**
+```json
+{
+    "message": "Insert Success",
+    "code": 200,
+    "status": "success",
+    "data": {
+        "jumlah_nakes": 122,
+        "name": "triadqmokao",
+        "address": "dfas4wefwef",
+        "faskes_id": 1
+    }
+}
+```
+### Get All Nakes
+Method `GET`
+
+Endpoint Get All Nakes
+
+```text
+https://test-golang-triadmoko.herokuapp.com/api/v1/nakes/
+```
+
+
+**Request Headers**
+
+```text
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDgzOTUwMzksInVzZXJfaWQiOjJ9.vYSBM_sk0bvmmPsVnvN4gTmh8-v6nwr4ccNfcV2MiVA
+```
+
+**Response**
+```json
+{
+    "message": "Get Nakes Success",
+    "code": 200,
+    "status": "success",
+    "data": [
+        {
+            "jumlah_nakes": 122,
+            "name": "triadqmokao",
+            "address": "dfas4wefwef",
+            "faskes_id": 1
+        },
+        {
+            "jumlah_nakes": 1223,
+            "name": "triadmoko",
+            "address": "dfas4wefwef",
+            "faskes_id": 1
+        }
+    ]
+}
+```
+
+### Delete Nakes
+Method `Delete`
+
+Endpoint 
+```
+https://test-golang-triadmoko.herokuapp.com/api/v1/nakes/delete/1
+```
+
+```text
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDgzOTUwMzksInVzZXJfaWQiOjJ9.vYSBM_sk0bvmmPsVnvN4gTmh8-v6nwr4ccNfcV2MiVA
+```
+**Response**
+```json
+{
+    "message": "Delete Success",
+    "code": 200,
+    "status": "success",
+    "data": "Data Success Delete"
+}
+```
+## Get PDF
+
+Method `Get`
+Endpoint
+```
+localhost:8080/api/v1/nakes/pdf
+```
+
+```text
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDgzOTUwMzksInVzZXJfaWQiOjJ9.vYSBM_sk0bvmmPsVnvN4gTmh8-v6nwr4ccNfcV2MiVA
+```
+**Response**
+```json
+{
+    "message": "Insert Success",
+    "code": 200,
+    "status": "success",
+    "data": "Download pdf di link berikut : 'localhost:8080/pdf/file.pdf'"
+}
+```
+
+### Show PDF
+Method `Get`
+```
+localhost:8080/pdf/file.pdf
+```
+
+**Response**
+
+![Response Show PDF](pdf.png)
