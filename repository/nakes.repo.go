@@ -34,3 +34,11 @@ func (r *repository) FindAllNakes() ([]entity.Nakes, error) {
 	}
 	return nakes, nil
 }
+func (r *repository) DeleteNakes(ID int) (entity.Nakes, error) {
+	nakes := entity.Nakes{}
+	err := r.db.Delete(&nakes, ID).Error
+	if err != nil {
+		return nakes, err
+	}
+	return nakes, nil
+}

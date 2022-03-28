@@ -41,6 +41,8 @@ func main() {
 	nakes.POST("/create", handler.CreateNakes)
 	nakes.PUT("/update/:id", authMiddleware(userAuthService, service), handler.UpdateNakes)
 	nakes.GET("/", handler.FindAllNakes)
+	nakes.DELETE("/delete/:id", handler.DeleteNakes)
+
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 

@@ -55,3 +55,10 @@ func (s *service) FindAllNakes() ([]entity.Nakes, error) {
 	}
 	return nakes, err
 }
+func (s *service) DeleteNakes(ID int) (entity.Nakes, error) {
+	nakes, err := s.repository.DeleteNakes(ID)
+	if err != nil {
+		return nakes, err
+	}
+	return nakes, err
+}
